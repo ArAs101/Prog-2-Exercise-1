@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -28,6 +29,7 @@ public class HomeController implements Initializable {
     @FXML
     public JFXComboBox genreComboBox;
 
+
     @FXML
     public JFXButton sortBtn;
 
@@ -45,9 +47,14 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
+        genreComboBox.getItems().addAll("ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY", "CRIME",
+                "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR", "MUSICAL", "MYSTERY", "ROMANCE",
+                "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR", "WESTERN");
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
+
+
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {

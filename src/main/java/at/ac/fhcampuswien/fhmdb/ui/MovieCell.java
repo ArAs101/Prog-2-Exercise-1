@@ -9,6 +9,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.util.Arrays;
+
 public class MovieCell extends ListCell<Movie> {
     private final Label title = new Label();
     private final Label detail = new Label();
@@ -28,6 +30,14 @@ public class MovieCell extends ListCell<Movie> {
                             ? movie.getDescription()
                             : "No description available"
             );
+
+            detail.setText(
+                    movie.getGenres() != null
+                            ? movie.getGenres().toString().replace("[","").replace("]","")
+                            : "No genres available"
+            );
+
+
 
 
             // color scheme
