@@ -76,6 +76,14 @@ public class Movie {
                 Arrays.asList(Genre.CRIME, Genre.DRAMA)
         ));
 
+        movies.add(new Movie(
+                "John Wick Chapter 4",
+                "John Wick uncovers a path to defeating The High Table. But before he can earn his " +
+                        "freedom, Wick must face off against a new enemy with powerful alliances across the " +
+                        "globe and forces that turn old friends into foes.",
+                Arrays.asList(Genre.ACTION, Genre.CRIME, Genre.THRILLER)
+        ));
+
         return movies;
     }
 }
