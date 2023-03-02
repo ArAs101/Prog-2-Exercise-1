@@ -12,10 +12,10 @@ class HomeControllerTest {
     @Test
 
     void show_unfiltered_movies_initially() {
-        // given
         List<Movie> initialMovies = Movie.initializeMovies();
         assertNotEquals(null, initialMovies);
     }
+
 
     //void
 

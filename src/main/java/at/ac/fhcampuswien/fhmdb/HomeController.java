@@ -9,14 +9,17 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -41,6 +44,13 @@ public class HomeController implements Initializable {
 
     public SortState sortState = SortState.NONE;
 
+    private static int sortClicks = 0;
+
+    private ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+
+    @FXML
+    public Label sortingStatement;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         observableMovies.addAll(allMovies);         // add dummy data to observable list
@@ -55,29 +65,52 @@ public class HomeController implements Initializable {
                 "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR", "MUSICAL", "MYSTERY", "ROMANCE",
                 "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR", "WESTERN");
 
+
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
 
+        // working filter and query missing...
+        searchBtn.setOnAction(event -> {
+
+            if (genreComboBox.getSelectionModel().getSelectedItem() != null) {
+                this.initializeState();
+                for (Movie movie : observableMovies) {
+                    if (!(movie.getGenres().contains(genreComboBox.getSelectionModel().getSelectedItem()))) {
+                        observableMovies.remove(movie);
+                    }
+
+                }
+                //filteredMovies.add(observableMovies);
+                movieListView.setItems(observableMovies);
+                System.out.println(genreComboBox.getSelectionModel().getSelectedItem());
+            }
+        });
 
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
-            if(sortBtn.getText().equals("Sort (asc)")) {
-                // TODO sort observableMovies ascending
+            if (sortBtn.getText().equals("Sort (asc)") && sortClicks % 2 == 0) {
+                this.sortMovies();
 
                 sortBtn.setText("Sort (desc)");
+                sortingStatement.setText("Sorting Order: Ascending");
             } else {
-                // TODO sort observableMovies descending
+
+                observableMovies.sort(Comparator.comparing(Movie::getTitle).reversed());
+                sortState = SortState.DESCENDING;
+
+                sortingStatement.setText("Sorting Order: Descending");
                 sortBtn.setText("Sort (asc)");
             }
         });
     }
-    public void initializeState(){
+
+    public void initializeState() {
         observableMovies.clear();
         observableMovies.addAll(allMovies);
     }
 
-    public void sortMovies(){
+    public void sortMovies() {
         observableMovies.sort(Comparator.comparing(Movie::getTitle));
         sortState = SortState.ASCENDING;
     }
