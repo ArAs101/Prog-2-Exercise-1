@@ -34,9 +34,10 @@
          <JFXComboBox fx:id="genreComboBox" focusColor="#f5c518" styleClass="filter-combo-box" stylesheets="@styles.css" />
          <JFXButton fx:id="searchBtn" styleClass="background-yellow" stylesheets="@styles.css" text="Filter" />
       </children>
-      <VBox.margin>
-         <Insets />
-      </VBox.margin>
+      //<VBox.margin>
+        // <Insets />
+      //</VBox.margin>
+
       <padding>
          <Insets bottom="20.0" left="10.0" top="20.0" />
       </padding>
