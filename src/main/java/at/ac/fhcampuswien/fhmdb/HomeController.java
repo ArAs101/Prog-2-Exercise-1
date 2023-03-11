@@ -61,7 +61,7 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
-        genreComboBox.getItems().setAll(Genre.values()); //get all values from enum Genre and fill the combo-box
+        genreComboBox.getItems().addAll(Genre.values()); //get all values from enum Genre and fill the combo-box
 
 
         // TODO add event handlers to buttons and call the regarding methods
@@ -85,6 +85,11 @@ public class HomeController implements Initializable {
                 }
                 observableMovies.addAll(tempMovies);
             }
+
+            if (genreComboBox.getSelectionModel().getSelectedItem() == Genre.No_Filter) {
+                observableMovies.clear();
+                observableMovies.addAll(allMovies);
+            }
         });
 
 
@@ -104,6 +109,10 @@ public class HomeController implements Initializable {
                 sortBtn.setText("Sort (asc)");
             }
         });
+
+        //search for query
+        // to be continued...
+
     }
 
     public void initializeState() {
