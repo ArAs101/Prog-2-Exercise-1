@@ -61,9 +61,7 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
-        genreComboBox.getItems().addAll("ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY", "CRIME",
-                "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR", "MUSICAL", "MYSTERY", "ROMANCE",
-                "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR", "WESTERN");
+        genreComboBox.getItems().setAll(Genre.values()); //get all values from enum Genre and fill the combo-box
 
 
         // TODO add event handlers to buttons and call the regarding methods
@@ -73,16 +71,19 @@ public class HomeController implements Initializable {
         searchBtn.setOnAction(event -> {
 
             if (genreComboBox.getSelectionModel().getSelectedItem() != null) {
-                this.initializeState();
-                for (Movie movie : observableMovies) {
-                    if (!(movie.getGenres().contains(genreComboBox.getSelectionModel().getSelectedItem()))) {
-                        observableMovies.remove(movie);
+
+                Genre tempSelectGenre = (Genre) genreComboBox.getSelectionModel().getSelectedItem();
+                System.out.println(tempSelectGenre.toString()); //print selected genre to console
+
+                List<Movie> tempMovies = new LinkedList<>();
+                observableMovies.clear();
+                for (Movie movie : allMovies) {
+                    if (movie.getGenres().contains(tempSelectGenre)) {
+                        tempMovies.add(movie);
                     }
 
                 }
-                //filteredMovies.add(observableMovies);
-                movieListView.setItems(observableMovies);
-                System.out.println(genreComboBox.getSelectionModel().getSelectedItem());
+                observableMovies.addAll(tempMovies);
             }
         });
 
