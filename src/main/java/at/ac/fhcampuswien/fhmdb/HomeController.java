@@ -9,17 +9,16 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import java.net.URL;
-import java.util.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.net.URL;
+import java.util.*;
 
 public class HomeController implements Initializable {
     @FXML
@@ -135,8 +134,9 @@ public class HomeController implements Initializable {
 
     }
 
-    public void sortMovies() {
+    public ObservableList<Movie> sortMovies() {
         observableMovies.sort(Comparator.comparing(Movie::getTitle));
         sortState = SortState.ASCENDING;
+        return null;
     }
 }
