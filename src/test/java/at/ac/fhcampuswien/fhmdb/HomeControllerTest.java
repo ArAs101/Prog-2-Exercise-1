@@ -65,9 +65,9 @@ class HomeControllerTest {
         // THEN
         //create expected list
         ObservableList<Movie> expected = FXCollections.observableArrayList();
-        expected.add(movieA);
-        expected.add(movieB);
         expected.add(movieC);
+        expected.add(movieB);
+        expected.add(movieA);
         //TEST
         assertEquals(expected, actual);
     }
