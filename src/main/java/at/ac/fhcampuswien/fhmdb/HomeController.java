@@ -67,13 +67,10 @@ public class HomeController implements Initializable {
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
 
-        // working filter and query missing...
         searchBtn.setOnAction(event -> {
 
             if (genreComboBox.getSelectionModel().getSelectedItem() != null) {
-
                 Genre tempSelectGenre = (Genre) genreComboBox.getSelectionModel().getSelectedItem();
-                System.out.println(tempSelectGenre.toString()); //print selected genre to console
 
                 List<Movie> tempMovies = new LinkedList<>();
                 observableMovies.clear();
@@ -90,6 +87,31 @@ public class HomeController implements Initializable {
                 observableMovies.clear();
                 observableMovies.addAll(allMovies);
             }
+        });
+
+        searchBtn.setOnAction(actionEvent -> {
+            //search for query
+            List<Movie> filteredMovies = new LinkedList<>();
+
+            if (genreComboBox.getValue() == null || genreComboBox.getValue() == Genre.No_Filter) {
+                observableMovies.clear();
+                observableMovies.addAll(allMovies);
+            } else if (genreComboBox.getValue() != Genre.No_Filter) {
+                observableMovies.clear();
+                observableMovies.addAll(allMovies);
+                observableMovies.removeIf(movie -> !(movie.getGenres().contains(genreComboBox.getValue())));
+            }
+
+            if (searchField.getText() != null) {
+                for (Movie movie : observableMovies) {
+                    if (movie.getTitle().toLowerCase().contains(searchField.getText().toLowerCase()) || movie.getDescription().toLowerCase().contains(searchField.getText().toLowerCase()) || movie.getGenres().toString().toLowerCase().contains(searchField.getText().toLowerCase())) {
+                        filteredMovies.add(movie);
+                    }
+                }
+                observableMovies.clear();
+                observableMovies.addAll(filteredMovies);
+            }
+
         });
 
 
@@ -110,14 +132,7 @@ public class HomeController implements Initializable {
             }
         });
 
-        //search for query
-        // to be continued...
 
-    }
-
-    public void initializeState() {
-        observableMovies.clear();
-        observableMovies.addAll(allMovies);
     }
 
     public void sortMovies() {
