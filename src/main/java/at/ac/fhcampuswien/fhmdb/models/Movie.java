@@ -8,6 +8,7 @@ public class Movie {
     private String title;
     private String description;
     private List<Genre> genres;
+
     public Movie(String title, String description, List<Genre> genres) {
         this.title = title;
         this.description = description;
@@ -15,14 +16,14 @@ public class Movie {
     }
 
     @Override
-    public boolean equals(Object object){
-        if(object == null){
+    public boolean equals(Object object) {
+        if (object == null) {
             return false;
         }
-        if(object == this){
+        if (object == this) {
             return true;
         }
-        if(!(object instanceof Movie other)){
+        if (!(object instanceof Movie other)) {
             return false;
         }
         return this.title.equals(other.title) && this.description.equals(other.description) && this.genres.equals(other.genres);
@@ -32,10 +33,15 @@ public class Movie {
         return title;
     }
 
-    public String getDescription() { return description; }
-    public List<Genre> getGenres() { return genres; }
+    public String getDescription() {
+        return description;
+    }
 
-    public static List<Movie> initializeMovies(){
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public static List<Movie> initializeMovies() {
         List<Movie> movies = new ArrayList<>();
         movies.add(new Movie(
                 "The Dog",

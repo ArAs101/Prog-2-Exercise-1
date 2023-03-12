@@ -35,11 +35,9 @@ public class MovieCell extends ListCell<Movie> {
 
             detail2.setText(
                     movie.getGenres() != null
-                            ? movie.getGenres().toString().replace("[","").replace("]","")
+                            ? movie.getGenres().toString().replace("[", "").replace("]", "")
                             : "No genres available"
             );
-
-
 
 
             // color scheme
